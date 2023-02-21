@@ -1,0 +1,40 @@
+.container{
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin: 3rem 0;
+}
+.container1 {
+  display: inline-block;
+}
+.subcontainer{
+  display: flex;
+  justify-content: center;
+  background-color: red;
+  width: 2px;
+  height: 30px;
+  margin: 2px;
+
+}
+
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .card,
+  .footer {
+    border-color: #222;
+  }
+  .code {
+    background: #111;
+  }
+  .logo img {
+    filter: invert(1);
+  }
+}
+
