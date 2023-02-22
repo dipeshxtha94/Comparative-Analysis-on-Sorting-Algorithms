@@ -6,16 +6,16 @@ import sorts from './algorithms/quickSort'
 import { RiCloseCircleFill } from 'react-icons/ri'
 import Head from 'next/head'
 import { useRouter } from "next/router";
-import axios from 'axios'
+import Link from 'next/link'
 
 
-async function createTask1(arrayData, sortedData) {
+async function createTask1(arrayData, sortedData, algorithmName, executionTime) {
   const res = await fetch('/api/hello', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ arrayData, sortedData }),
+    body: JSON.stringify({ arrayData, sortedData, algorithmName, executionTime }),
   });
 
   const data = await res.json();
@@ -40,10 +40,14 @@ export default function sortingBars() {
   const router = useRouter();
 
 
-
+//console.log(array)
   useEffect(() => {
-    //let inp= <input type='number' required/>
-    resetFunc()
+    // let a=setArray(localStorage.getItem('myValue1'))
+    // console.log(a)
+    if(array.length===0){
+      resetFunc()
+    }
+    
   }, [])
 
   //let inp= []
@@ -57,6 +61,7 @@ export default function sortingBars() {
       arr.push(randomIntFromInterval(5, 450))
     }
     setArray(arr);
+    // localStorage.setItem('myValue1', arr)
     document.getElementById('exetime').innerHTML = ''
 
   }
@@ -118,7 +123,8 @@ export default function sortingBars() {
     //   setInp2('')
     //   return false
 
-    await setArray(inpVal)
+   await setArray(inpVal)
+  //  localStorage.setItem('myValue1', inpVal)
     let c = document.getElementById('form2').style
     c.display = 'none'
     setDisableOptions(false)
@@ -166,7 +172,8 @@ export default function sortingBars() {
        }
   }
 
-  const handleSortedBars= ()=>{
+  const handleSortedBars= (e)=>{
+    e.preventDefault()
     router.push("/sortedBars");
 
   }
@@ -184,7 +191,8 @@ export default function sortingBars() {
     let exetime = `Execution time: ${end - start} ms`
     let complexity= await algorithm
     document.getElementById('exetime').innerHTML = `${exetime} & Algorithm: Merge Sort & Time Complexity: O(n^2)` 
-    const result= createTask1(copy, array)
+    let algorithmName= 'Bubble Sort'
+    const result= createTask1(copy, array, algorithmName, exetime)
   }
 
   const mergeSort = async () => {
@@ -202,7 +210,8 @@ export default function sortingBars() {
     let exetime = `Execution time: ${end - start} ms`
     let complexity= await algorithm
     document.getElementById('exetime').innerHTML = `${exetime} & Algorithm: Merge Sort & Time Complexity: O(nlogn)` 
-    const result= createTask1(copy, array)
+    let algorithmName='Merge Sort'
+    const result= createTask1(copy, array, algorithmName, exetime)
 
   }
 
@@ -225,7 +234,8 @@ export default function sortingBars() {
     document.getElementById('exetime').innerHTML = `${exetime} & Algorithm: Quick Sort & Time Complexity: O(nlogn)` 
     // console.log(algorithm.name)
     // document.getElementById('algorithm').innerHTML= complexity
-    const result= createTask1(copy, array)
+    let algorithmName= 'Quick Sort'
+    const result= createTask1(copy, array, algorithmName, exetime)
  
   }
 

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import connectDb from '../utils/connectMongo';
 import Test from '../models/testModel';
-import axios from 'axios';
 import { useRouter } from "next/router";
+import Link from 'next/link'
 
 
 
@@ -34,11 +34,16 @@ const sortedBars = ({data}) => {
            {value.length===0?(<p>This page is Empty</p>):''}
           <div  style={{margin: '10px'}}>
           <p style={{overflow: 'auto'}}>Unsorted Array: {`${value.arrayData},`}</p>
-          <p style={{overflow: 'auto'}}>Sorted Array: {`${value.sortedData},`}</p><button onClick={()=>handleDelete(value._id)}>Delete</button>
+          <p style={{overflow: 'auto'}}>Sorted Array: {`${value.sortedData},`}</p>
+          <p>Algorithm: {value.algorithmName}</p>
+          <p>{value.executionTime}</p><button onClick={()=>handleDelete(value._id)}>Delete</button>
             <hr/>
           </div></div>
       })}
-
+      <div style={{textAlign:'center', margin: '5px'}}>
+        <Link href='/'><span style={{textAlign: 'center', margin:'auto', border:'1px solid black', borderRadius:'3px'}}>Back to Home Page</span></Link>
+      </div>
+    
     </div>
   )
 }

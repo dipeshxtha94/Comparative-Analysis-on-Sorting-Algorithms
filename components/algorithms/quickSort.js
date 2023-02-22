@@ -26,7 +26,7 @@ const partition = (arr, left, right, array, setArray) => {
       setTimeout(() => {
         bar1.backgroundColor = 'black'
         bar2.backgroundColor = 'yellow'
-      }, 60)
+      }, 10)
 
       setArray([...arr])
     }
